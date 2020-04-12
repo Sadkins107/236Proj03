@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpFlag = false;
     private bool jump = false;
 
+    private bool attack = false;
+    private bool attackFlag = false;
+
     public bool hasSpeedPotion = false;
     public bool hasJumpPotion = false;
     public float modAmount = 0f;
@@ -33,6 +36,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
         }
 
+        if (attackFlag)
+        {
+            attackFlag = false;
+            animator.SetBool("IsAttacking", true);
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             if (!animator.GetBool("IsJumping"))
@@ -40,6 +49,24 @@ public class PlayerMovement : MonoBehaviour
                 AudioSource.PlayClipAtPoint(jumpClip, transform.position);
                 jump = true;
                 animator.SetBool("IsJumping", true);
+            }
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            if (!animator.GetBool("IsAttacking"))
+            {
+                attack = true;
+                animator.SetBool("IsAttacking", true);
+            }
+        }
+
+        if (Input.GetButtonUp("Submit"))
+        {
+            if (animator.GetBool("IsAttacking"))
+            {
+                attack = false;
+                animator.SetBool("IsAttacking", false);
             }
         }
 
@@ -71,6 +98,11 @@ public class PlayerMovement : MonoBehaviour
         if (jump)
         {
             jumpFlag = true;
+        }
+
+        if (attack)
+        {
+            attackFlag = true;
         }
     }
 }
