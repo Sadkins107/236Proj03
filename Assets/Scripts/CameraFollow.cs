@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamerFollow : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     public Transform followTransform;
     private Vector3 smoothPos;
@@ -16,19 +16,19 @@ public class CamerFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraHalf = Camera.main.orthographicSize * CamerFollow.main.aspect;
+        cameraHalf = Camera.main.orthographicSize * Camera.main.aspect;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         float leftBorder = cameraLeftBorder.transform.position.x + cameraHalf;
-        float rightBorder = caeraRightBorder.transform.position.x - cameraHalf;
+        float rightBorder = cameraRightBorder.transform.position.x - cameraHalf;
 
         smoothPos = Vector3.Lerp(this.transform.position,
             new Vector3(Mathf.Clamp(followTransform.position.x, leftBorder, rightBorder),
             this.transform.position.y,
-            this.trasform.position.z), smoothSpeed);
+            this.transform.position.z), smoothSpeed);
 
         this.transform.position = smoothPos;
     }
