@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float runSpeed = 25f;
     private float horizontalMove = 0f;
-    
+
+    public AudioClip jumpClip;
     private bool jumpFlag = false;
     private bool jump = false;
 
@@ -34,8 +35,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            jump = true;
-            animator.SetBool("IsJumping", true);
+            if (!animator.GetBool("IsJumping"))
+            {
+                AudioSource.PlayClipAtPoint(jumpClip, transform.position);
+                jump = true;
+                animator.SetBool("IsJumping", true);
+            }
         }
 
     }

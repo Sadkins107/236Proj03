@@ -30,7 +30,7 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
-	public float m_JumpForceMod = 1f;
+	public float m_JumpForceMod = 0f;
 
 	private void Awake()
 	{
